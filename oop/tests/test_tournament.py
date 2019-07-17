@@ -21,6 +21,6 @@ class TestTournament(unittest.TestCase):
         arena.add_game(game2)
         arena.add_game(game3)
 
-        # self.assertEquals(arena.standing()[0], player3)
+        self.assertEqual(arena.standing()[0], player3)
 
         # arena._calc()

@@ -3,30 +3,33 @@ from oop.exceptions import *
 class Arena:
     def __init__(self):
         self.games = []
-        self.standing = []
+        self._standing = []
 
     def add_game(self, game):
         self.games.append(game)
-        print(self.games)
+        # print(self.games)
         self._calc()
 
     def _calc(self):
-        dct = {}
+        wins = {}
         for g in self.games:
             white = g.white
             black = g.black
-            if not white in dct:
-                dct[white] = 0
-            if not black in dct:
-                dct[black] = 0
+            if not white in wins:
+                wins[white] = 0
+            if not black in wins:
+                wins[black] = 0
 
             if g.white_won():
-                dct[white] += 1
+                wins[white] += 1
             else:
-                dct[black] += 1
+                wins[black] += 1
 
-        print(dct)
+        # print(wins)
+        self._standing = [player for player, n in sorted(wins.items(), key=lambda x: x[1], reverse=True)]
 
+    def standing(self):
+        return self._standing
 
 
 
