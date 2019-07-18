@@ -37,11 +37,33 @@ class Player:
     def __init__(self, name, ranking):
         if len(name) < 3:
             raise NameTooShortException
-        self.name = name
+        # self.name_tuple = tuple(name)
+        self._name = name
         self.ranking = ranking
+
+    # @property
+    # def name(self):
+    #     return self.name_tuple[0]
+
+    @property
+    def name(self):
+        return self._name
 
     def description(self):
         return f"My name is {self.name} and my ranking is {self.ranking}."
+
+    def __eq__(self, other):
+        if not isinstance(other, Player):
+            return False
+        return self.name == other.name
+
+    def __hash__(self):
+        result = 0
+        for letter in self.name:
+            result += ord(letter)
+            result *= 31
+        return result
+
 
 
 class Game:
